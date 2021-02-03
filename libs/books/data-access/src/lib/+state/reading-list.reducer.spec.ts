@@ -53,7 +53,7 @@ describe('Books Reducer', () => {
     });
 
     it('removeFromReadingList should do book removal from the state', () => {
-      const action = ReadingListActions.removeFromReadingList({
+      const action = ReadingListActions.confirmedRemoveFromReadingList({
         item: createReadingListItem('B')
       });
 
