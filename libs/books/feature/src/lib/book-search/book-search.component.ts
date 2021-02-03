@@ -5,11 +5,11 @@ import {
   clearSearch,
   getAllBooks,
   ReadingListBook,
-  searchBooks, getBooksError
+  searchBooks, getBooksError, removeFromReadingList
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
 import { Book } from '@tmo/shared/models';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'tmo-book-search',
   templateUrl: './book-search.component.html',
@@ -25,7 +25,8 @@ export class BookSearchComponent implements OnInit {
 
   constructor(
     private readonly store: Store,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private _snackBar: MatSnackBar
   ) {}
 
   get searchTerm(): string {
@@ -57,4 +58,17 @@ export class BookSearchComponent implements OnInit {
       this.store.dispatch(clearSearch());
     }
   }
+
+  openSnackBar(message: string, action: string,item:ReadingListBook) {
+    let snackBarRef = this._snackBar.open(message, action, {
+      duration: 3000,
+    });
+    snackBarRef.onAction().subscribe(
+      (data)=>{
+        console.log(data);
+        this.store.dispatch(removeFromReadingList({ item:{...item,bookId:item.id} }));
+      }
+    )
+  }
+
 }
