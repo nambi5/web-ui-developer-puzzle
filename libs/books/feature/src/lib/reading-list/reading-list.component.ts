@@ -19,9 +19,7 @@ export class ReadingListComponent {
   }
 
   openSnackBar(message: string, action: string,book:Book) {
-    let snackBarRef = this._snackBar.open(message, action, {
-      duration: 3000,
-    });
+    let snackBarRef = this._snackBar.open(message, action);
     snackBarRef.onAction().subscribe(
       (data)=>{
         console.log(data);
