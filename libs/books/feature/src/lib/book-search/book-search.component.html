@@ -32,7 +32,7 @@
           </div>
           <p [innerHTML]="b.description"></p>
           <div>
-            <button
+            <button id="wantToRead"
               mat-flat-button
               color="primary"
               (click)="addBookToReadingList(b);openSnackBar('Added to Reading list', 'Undo', b)"
