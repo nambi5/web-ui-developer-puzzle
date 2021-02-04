@@ -18,7 +18,7 @@
     </div>
     <div>
       <button *ngIf="!b.finished;else finished" mat-icon-button [attr.aria-label]="'Mark ' + b.title + ' as Read'"
-        (click)="markBookAsFinished(b)">
+        (click)="markBookAsFinished(b)" id="markAsRead">
         <mat-icon>check_circle_outline</mat-icon>
       </button>
       <ng-template #finished>
