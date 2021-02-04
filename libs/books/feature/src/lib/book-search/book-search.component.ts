@@ -5,21 +5,27 @@ import {
   clearSearch,
   getAllBooks,
   ReadingListBook,
-  searchBooks, getBooksError, removeFromReadingList
+  searchBooks,
+  getBooksError,
+  removeFromReadingList,
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
 import { Book } from '@tmo/shared/models';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarRef,
+  SimpleSnackBar,
+} from '@angular/material/snack-bar';
 @Component({
   selector: 'tmo-book-search',
   templateUrl: './book-search.component.html',
-  styleUrls: ['./book-search.component.scss']
+  styleUrls: ['./book-search.component.scss'],
 })
 export class BookSearchComponent implements OnInit {
   books: ReadingListBook[];
 
   searchForm = this.fb.group({
-    term: ''
+    term: '',
   });
   loadingError: string;
 
@@ -34,12 +40,13 @@ export class BookSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select(getAllBooks).subscribe(books => {
+    this.store.select(getAllBooks).subscribe((books) => {
       this.books = books;
     });
-    this.store.select(getBooksError).subscribe(loadError => {
+    this.store.select(getBooksError).subscribe((loadError) => {
       this.loadingError = loadError;
     });
+    this.searchExample();
   }
 
   addBookToReadingList(book: Book) {
@@ -59,14 +66,19 @@ export class BookSearchComponent implements OnInit {
     }
   }
 
-  openSnackBar(message: string, action: string,item:ReadingListBook) {
-    let snackBarRef = this._snackBar.open(message, action);
-    snackBarRef.onAction().subscribe(
-      (data)=>{
-        console.log(data);
-        this.store.dispatch(removeFromReadingList({ item:{...item,bookId:item.id} }));
-      }
-    )
+  openSnackBar(message: string, action: string, item: ReadingListBook) {
+    const snackBarRef = this._snackBar.open(message, action);
+    this.openSnackBarOnAct(snackBarRef, item);
   }
 
+  openSnackBarOnAct(
+    snackBarRef: MatSnackBarRef<SimpleSnackBar>,
+    item: ReadingListBook
+  ) {
+    snackBarRef.onAction().subscribe((data) => {
+      this.store.dispatch(
+        removeFromReadingList({ item: { ...item, bookId: item.id } })
+      );
+    });
+  }
 }
