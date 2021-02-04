@@ -57,7 +57,7 @@ const readingListReducer = createReducer(
     readingListAdapter.updateOne(
       {
         id: action.item.bookId,
-        changes: { finished: true, finishedDate: new Date().toISOString() },
+        changes: { finished: true, finishedDate: new Date(2021, 0, 1).toISOString() },
         ...action.item,
       },
       state

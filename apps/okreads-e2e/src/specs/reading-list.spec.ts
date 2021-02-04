@@ -1,4 +1,4 @@
-import { $, $$, browser, ExpectedConditions } from 'protractor';
+import { $, $$, browser, ElementFinder, ExpectedConditions } from 'protractor';
 
 describe('When: I use the reading list feature', () => {
   it('Then: I should see my reading list', async () => {
@@ -20,9 +20,12 @@ describe('When: I use the reading list feature', () => {
 
   it('Then: I should be able to mark my reading finished in list', async () => {
     
-    const allBooksToBeFinished = await $$('#markAsRead');
-    await allBooksToBeFinished[0].click();
+    if(await $$('#markAsRead').isPresent()){
+      const allBooksToBeFinished = await $$('#markAsRead');
 
-    expect(allBooksToBeFinished.length-1).toBe((await $$('#markAsRead')).length)
+      await allBooksToBeFinished[0].click();
+      expect(allBooksToBeFinished.length-1).toBe((await $$('#markAsRead')).length)
+    }
+
   });
 });

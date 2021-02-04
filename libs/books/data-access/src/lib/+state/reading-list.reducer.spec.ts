@@ -61,6 +61,7 @@ describe('Books Reducer', () => {
 
       expect(result.ids).toEqual(['A']);
     });
+
     it('failedRemoveFromReadingList should undo book removal from the state', () => {
       const action = ReadingListActions.failedRemoveFromReadingList({
         item: createReadingListItem('B')
@@ -70,6 +71,17 @@ describe('Books Reducer', () => {
 
       expect(result.ids).toEqual(['A', 'B']);
     });
+
+    it('addToReadingList should do book addition to the state', () => {
+      const action = ReadingListActions.confirmedUpdateFromReadingList({
+        item: createReadingListItem('B')
+      });
+
+      const result: State = reducer(state, action);
+
+      expect(result.entities['B']).toHaveProperty('finishedDate','2020-12-31T18:30:00.000Z');
+    });
+
   });
 
   describe('unknown action', () => {
