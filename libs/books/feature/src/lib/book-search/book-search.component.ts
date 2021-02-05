@@ -14,18 +14,18 @@ import { Book } from '@tmo/shared/models';
 import {
   MatSnackBar,
   MatSnackBarRef,
-  SimpleSnackBar,
+  SimpleSnackBar
 } from '@angular/material/snack-bar';
 @Component({
   selector: 'tmo-book-search',
   templateUrl: './book-search.component.html',
-  styleUrls: ['./book-search.component.scss'],
+  styleUrls: ['./book-search.component.scss']
 })
 export class BookSearchComponent implements OnInit {
   books: ReadingListBook[];
 
   searchForm = this.fb.group({
-    term: '',
+    term: ''
   });
   loadingError: string;
 
@@ -48,8 +48,6 @@ export class BookSearchComponent implements OnInit {
     });
   }
 
-  
-
   searchExample() {
     this.searchForm.controls.term.setValue('javascript');
     this.searchBooks();
@@ -62,10 +60,10 @@ export class BookSearchComponent implements OnInit {
       this.store.dispatch(clearSearch());
     }
   }
-  
-  addBookandShowUndo(book:ReadingListBook){
+
+  addBookandShowUndo(book: ReadingListBook) {
     this.addBookToReadingList(book);
-    this.openSnackBar(book)
+    this.openSnackBar(book);
   }
 
   addBookToReadingList(book: ReadingListBook) {
@@ -73,7 +71,7 @@ export class BookSearchComponent implements OnInit {
   }
 
   openSnackBar(item: ReadingListBook) {
-    const snackBarRef = this.snackBar.open('Added to Reading list', 'Undo',);
+    const snackBarRef = this.snackBar.open('Added to Reading list', 'Undo');
     this.openSnackBarOnAct(snackBarRef, item);
   }
 
