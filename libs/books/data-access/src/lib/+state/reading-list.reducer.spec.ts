@@ -79,7 +79,7 @@ describe('Books Reducer', () => {
 
       const result: State = reducer(state, action);
 
-      expect(result.entities['B']).toHaveProperty('finishedDate','2020-12-31T18:30:00.000Z');
+      expect(result.entities['B']).toHaveProperty('finishedDate');
     });
 
   });
