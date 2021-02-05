@@ -14,7 +14,7 @@
         mat-icon-button
         color="warn"
         [attr.aria-label]="'Remove ' + b.title + ' from reading list'"
-        (click)="removeFromReadingList(b);openSnackBar('Removed from reading list', 'Undo', b)"
+        (click)="removeBookAndShowUndo(b)"
       >
         <mat-icon>remove_circle</mat-icon>
       </button>

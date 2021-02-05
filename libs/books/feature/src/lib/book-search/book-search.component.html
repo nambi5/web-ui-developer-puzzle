@@ -35,7 +35,7 @@
             <button id="wantToRead"
               mat-flat-button
               color="primary"
-              (click)="addBookToReadingList(b);openSnackBar('Added to Reading list', 'Undo', b)"
+              (click)="addBookandShowUndo(b)"
               [disabled]="b.isAdded"
             >
               Want to Read

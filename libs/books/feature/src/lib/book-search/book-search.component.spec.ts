@@ -46,7 +46,7 @@ describe('ProductsListComponent', () => {
   it('should create a snackbar when the want-to-read button is clicked', async(() => {
     const snackbaropen = spyOn(snackbar, 'open');
     component.openSnackBarOnAct = () => {};
-    component.openSnackBar('test', 'undo', {} as ReadingListBook);
+    component.openSnackBar({} as ReadingListBook);
     expect(snackbaropen).toBeCalled();
   }));
   it('should trigger undo functionality on action button click ', async () => {

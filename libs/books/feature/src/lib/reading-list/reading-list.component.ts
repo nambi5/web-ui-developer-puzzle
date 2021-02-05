@@ -12,14 +12,19 @@ export class ReadingListComponent {
   readingList$ = this.store.select(getReadingList);
 
   constructor(private readonly store: Store,
-    private _snackBar: MatSnackBar) {}
+    private snackBar: MatSnackBar) {}
 
+  removeBookAndShowUndo(book:ReadingListBook){
+    this.removeFromReadingList(book);
+    this.openSnackBar(book);
+  }
+  
   removeFromReadingList(item) {
     this.store.dispatch(removeFromReadingList({ item }));
   }
 
-  openSnackBar(message: string, action: string, item: ReadingListBook) {
-    const snackBarRef = this._snackBar.open(message, action);
+  openSnackBar(item: ReadingListBook) {
+    const snackBarRef = this.snackBar.open('Removed from reading list', 'Undo');
     this.openSnackBarOnAct(snackBarRef, item);
   }
 

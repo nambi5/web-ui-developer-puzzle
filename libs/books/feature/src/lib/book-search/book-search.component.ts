@@ -32,7 +32,7 @@ export class BookSearchComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly fb: FormBuilder,
-    private _snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) {}
 
   get searchTerm(): string {
@@ -46,12 +46,9 @@ export class BookSearchComponent implements OnInit {
     this.store.select(getBooksError).subscribe((loadError) => {
       this.loadingError = loadError;
     });
-    this.searchExample();
   }
 
-  addBookToReadingList(book: Book) {
-    this.store.dispatch(addToReadingList({ book }));
-  }
+  
 
   searchExample() {
     this.searchForm.controls.term.setValue('javascript');
@@ -65,9 +62,18 @@ export class BookSearchComponent implements OnInit {
       this.store.dispatch(clearSearch());
     }
   }
+  
+  addBookandShowUndo(book:ReadingListBook){
+    this.addBookToReadingList(book);
+    this.openSnackBar(book)
+  }
 
-  openSnackBar(message: string, action: string, item: ReadingListBook) {
-    const snackBarRef = this._snackBar.open(message, action);
+  addBookToReadingList(book: ReadingListBook) {
+    this.store.dispatch(addToReadingList({ book }));
+  }
+
+  openSnackBar(item: ReadingListBook) {
+    const snackBarRef = this.snackBar.open('Added to Reading list', 'Undo',);
     this.openSnackBarOnAct(snackBarRef, item);
   }
 

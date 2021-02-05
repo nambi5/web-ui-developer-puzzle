@@ -40,10 +40,10 @@ describe('ReadingListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should create a snackbar when the want-to-read button is clicked', async(() => {
+  it('should create a snackbar when the remove icon is clicked', async(() => {
     const snackbaropen = spyOn(snackbar, 'open');
     component.openSnackBarOnAct = () => {};
-    component.openSnackBar('test', 'undo', {} as ReadingListBook);
+    component.openSnackBar({} as ReadingListBook);
     expect(snackbaropen).toBeCalled();
   }));
 
