@@ -29,17 +29,15 @@ describe('When: I use the reading list feature', () => {
       );
     }
   });
-  xit('Then: Undo Removed item from reading list', async () => {
+  it('Then: Undo Removed item from reading list', async () => {
     const bookList = await $$('[data-testing="remove-list-item"]');
-    const undoButton = $('simple-snack-bar .mat-button-wrapper');
-    await browser.wait(
-      ExpectedConditions.presenceOf(undoButton),4000
-    );
+    const undoButton = await $('simple-snack-bar button');
 
+    bookList[0].click();
     undoButton.click();
-
-    expect(bookList.length + 1).toBe(
-      (await $$('[data-testing="remove-list-item"]')).length
-    );
+    browser.sleep(1000);
+    expect(bookList.length).toBe(
+      (await $$('[data-testing="remove-list-item"]')).length 
+      );
   });
 });

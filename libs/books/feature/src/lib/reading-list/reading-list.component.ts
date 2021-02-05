@@ -32,7 +32,7 @@ export class ReadingListComponent {
     snackBarRef: MatSnackBarRef<SimpleSnackBar>,
     item: ReadingListBook
   ) {
-    snackBarRef.onAction().subscribe((data) => {
+    snackBarRef.onAction().subscribe(() => {
       this.store.dispatch(
         addToReadingList({ book: item })
       );
