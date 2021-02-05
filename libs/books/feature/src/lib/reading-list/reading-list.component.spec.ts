@@ -12,11 +12,12 @@ import {
   removeFromReadingList,
   updateBookFromReadingList,
 } from '@tmo/books/data-access';
+import { ReadingListItem } from '@tmo/shared/models';
 describe('ReadingListComponent', () => {
   let component: ReadingListComponent;
   let fixture: ComponentFixture<ReadingListComponent>;
   let store: Store;
-  const book = {
+  const book: ReadingListItem = {
     bookId: 'qU3rAgAAQBAJ',
     title: 'Speaking JavaScript',
     authors: ['Axel Rauschmayer'],
@@ -26,7 +27,6 @@ describe('ReadingListComponent', () => {
     publishedDate: '2014-02-25T00:00:00.000Z',
     coverUrl:
       'http://books.google.com/books/content?id=qU3rAgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-    isAdded: false,
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({

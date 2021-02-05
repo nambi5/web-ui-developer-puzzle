@@ -5,7 +5,8 @@ import {
   clearSearch,
   getAllBooks,
   ReadingListBook,
-  searchBooks, getBooksError
+  searchBooks,
+  getBooksError
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
 import { Book } from '@tmo/shared/models';
@@ -33,10 +34,10 @@ export class BookSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select(getAllBooks).subscribe(books => {
+    this.store.select(getAllBooks).subscribe((books) => {
       this.books = books;
     });
-    this.store.select(getBooksError).subscribe(loadError => {
+    this.store.select(getBooksError).subscribe((loadError) => {
       this.loadingError = loadError;
     });
   }
