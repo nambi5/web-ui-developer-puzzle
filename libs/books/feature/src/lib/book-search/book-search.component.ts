@@ -6,8 +6,8 @@ import {
   getAllBooks,
   ReadingListBook,
   searchBooks,
-  getBooksError,
   removeFromReadingList,
+  getBooksError
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
 import { Book } from '@tmo/shared/models';
