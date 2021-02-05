@@ -25,10 +25,10 @@ describe('ProductsListComponent', () => {
   it('should create', () => {
     expect(component).toBeDefined();
   });
-  it('should trigger subject-delaySearching on new input event ',()=>{
+  it('should trigger subject-searchTrigger on new input event ',()=>{
     const inputField = fixture.debugElement.query(By.css('input[formControlName="term"]'));
     inputField.nativeElement.value = "test";
-    const subjectNextEvent = spyOn(component.delaySearching$,'next');
+    const subjectNextEvent = spyOn(component.searchTrigger$,'next');
 
     inputField.triggerEventHandler('input', { target: inputField.nativeElement });
 
@@ -37,9 +37,9 @@ describe('ProductsListComponent', () => {
   })
   it('should call after searchBooks 500 millisecs', fakeAsync(()=> {
     const searchBoxSpy = spyOn(component,'searchBooks');
-    component.triggerDelayedSearch();
+    component.triggerSearchImp();
     
-    component.delaySearching$.next();
+    component.searchTrigger$.next();
 
     expect(searchBoxSpy).not.toHaveBeenCalled();
     tick(500);

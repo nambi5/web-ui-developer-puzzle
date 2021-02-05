@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   addToReadingList,
@@ -16,13 +16,13 @@ import { debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'tmo-book-search',
   templateUrl: './book-search.component.html',
-  styleUrls: ['./book-search.component.scss'],
+  styleUrls: ['./book-search.component.scss']
 })
-export class BookSearchComponent implements OnInit {
+export class BookSearchComponent implements OnInit, OnDestroy {
   books: ReadingListBook[];
-  delaySearching$ = new Subject();
+  searchTrigger$ = new Subject();
   searchForm = this.fb.group({
-    term: '',
+    term: ''
   });
   loadingError: string;
 
@@ -36,13 +36,13 @@ export class BookSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.triggerDelayedSearch();
+    this.triggerSearchImp();
     this.getAllbooks();
     this.getErrorMsg();
   }
 
-  triggerDelayedSearch(): void {
-    this.delaySearching$.pipe(debounceTime(500)).subscribe(() => {
+  triggerSearchImp(): void {
+    this.searchTrigger$.pipe(debounceTime(500)).subscribe(() => {
       this.searchBooks();
     });
   }
@@ -73,6 +73,11 @@ export class BookSearchComponent implements OnInit {
       this.store.dispatch(searchBooks({ term: this.searchTerm }));
     } else {
       this.store.dispatch(clearSearch());
+    }
+  }
+  ngOnDestroy() {
+    if (this.searchTrigger$) {
+      this.searchTrigger$.unsubscribe();
     }
   }
 }
